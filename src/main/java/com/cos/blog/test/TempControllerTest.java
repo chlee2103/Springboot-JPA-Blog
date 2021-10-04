@@ -1,14 +1,24 @@
 package com.cos.blog.test;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Date;
+
+@Slf4j
 @Controller
 public class TempControllerTest {
+	@GetMapping("/")
+	public String index(){
+		log.info("root : {}", new Date());
+
+		return "home";
+	}
 
 	@GetMapping("/temp/home")
 	public String tempHome() {
-		System.out.println("tempHome()");
+		log.info("tempHome()");
 		// prefix: /WEB-INF/views/  	->시작
 	    // suffix: .jsp								-> 끝
 		// 풀네임: /WEB-INF/views/home.jsp 
