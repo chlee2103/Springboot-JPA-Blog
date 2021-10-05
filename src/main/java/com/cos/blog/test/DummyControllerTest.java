@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -37,7 +38,7 @@ public class DummyControllerTest {
 	public String deleteUser(@PathVariable int id) {
 		try {
 			userRepository.deleteById(id);
-		}catch (IllegalArgumentException e) {
+		}catch (EmptyResultDataAccessException e) {
 			return "삭제에 실패하였습니다. 해당 id는 DB에 없습니다.";
 		}
 		
@@ -111,7 +112,7 @@ public class DummyControllerTest {
 		User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
 			@Override
 			public IllegalArgumentException get() {
-				return new IllegalArgumentException("해당 유저는 없습니다. id : " + id); // 후에는 인터셉터하여 에러페이지를 보여주어야 한다.
+				return new IllegalArgumentException("해당 유저는 없습니다."); // 후에는 인터셉터하여 에러페이지를 보여주어야 한다.
 			}
 		});
 		

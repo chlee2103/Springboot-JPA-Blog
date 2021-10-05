@@ -9,19 +9,14 @@ import java.util.Date;
 @Slf4j
 @Controller
 public class TempControllerTest {
-	@GetMapping("/")
-	public String index(){
-		log.info("root : {}", new Date());
 
-		return "home";
-	}
-
-	@GetMapping("/temp/home")
-	public String tempHome() {
-		log.info("tempHome()");
-		// prefix: /WEB-INF/views/  	->시작
-	    // suffix: .jsp								-> 끝
-		// 풀네임: /WEB-INF/views/home.jsp 
-		return "home";
-	}
+//
+//	@GetMapping("/temp/home")
+//	public String tempHome() {
+//		log.info("tempHome()");
+//		// prefix: /WEB-INF/views/  	->시작
+//	    // suffix: .jsp								-> 끝
+//		// 풀네임: /WEB-INF/views/home.jsp
+//		return "home";
+//	}
 }
