@@ -29,7 +29,7 @@
 
 
 <!-- /를 붙이면 자동으로 static을 찾아간다. -->
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 
 
 <%@ include file ="../layout/footer.jsp" %>
