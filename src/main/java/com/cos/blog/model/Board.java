@@ -1,27 +1,14 @@
 package com.cos.blog.model;
 
-import java.sql.Timestamp;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 
 
 @Data
@@ -41,7 +28,6 @@ public class Board {
 	@Lob // 대용량 데이터
 	private String content; // 썸머노트 라이브러리 <html>태그가 섞여서 디자인 됨.
 	
-	@ColumnDefault("0") // 숫자는 " ", 문자는 "' '"
 	private int count;// 조회수
 	
 	// fetch = FetchType.EAGER --> select 할때 무조건 들고와라
@@ -51,6 +37,7 @@ public class Board {
 	
 	@OneToMany (mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다 ( 난 FK가 아니예요) DB에 컬럼을 만들지 마세요
 	// 1개의 게시글엔 여러개의 리플이 달릴 수 있다.
+	// select 하기 위한 코드
 	private List<Reply> reply;
 	
 	@CreationTimestamp // 알아서 시간등록

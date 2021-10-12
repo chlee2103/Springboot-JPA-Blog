@@ -1,27 +1,19 @@
 package com.cos.blog.test;
 
-import java.util.List;
-import java.util.function.Supplier;
-
-import javax.transaction.Transactional;
-
+import com.cos.blog.model.RoleType;
+import com.cos.blog.model.User;
+import com.cos.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.cos.blog.model.RoleType;
-import com.cos.blog.model.User;
-import com.cos.blog.repository.UserRepository;
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.function.Supplier;
 
 @RestController // html파일이 아니라 data를 리턴해주는 controller
 public class DummyControllerTest {
@@ -78,10 +70,10 @@ public class DummyControllerTest {
 	// 한 페이지당 2건에 데이터를 리턴받아 볼 예정
 	// http://localhost:8000/blog/dummy/user?page=1     , page는 0부터 시작
 	@GetMapping("/dummy/user") // 2건씩 가져오고 sort는 id이고 최신순으로 정렬
-	public List<User> pageList(@PageableDefault(size=2, sort="id", direction=Sort.Direction.DESC) Pageable pageable){
+	public Page<User> pageList(@PageableDefault(size=2, sort="id", direction=Sort.Direction.DESC) Pageable pageable){
 		Page<User> pageUsers = userRepository.findAll(pageable);
 		List<User> users = pageUsers.getContent();
-		return users;
+		return pageUsers;
 	}
 	
 	// {id} 주소로 파라메터를 전달 받을 수 있음.
