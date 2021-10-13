@@ -18,7 +18,14 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-
+    @Transactional(readOnly = true)
+    public User userSearch(String username){
+        // orElseGet : 찾은 회원이 없으면 빈객체를 리턴해라
+        User user = userRepository.findByUsername(username).orElseGet(()->{
+            return new User();
+        });
+        return user; // null일수도 아닐수도 있다.
+    }
 
     @Transactional
     public void join(User user) {
@@ -38,10 +45,15 @@ public class UserService {
             return new IllegalArgumentException("회원찾기 실패");
         });
 
-        String rawPassword = user.getPassword();
-        String encPassword = encoder.encode(rawPassword);
-        persistance.setPassword(encPassword);
-        persistance.setEmail(user.getEmail());
+        // Validate 체크 => oauth에 값이 없으면 수정 가능
+        if(persistance.getOauth() == null || persistance.getOauth().equals("")){
+            String rawPassword = user.getPassword();
+            String encPassword = encoder.encode(rawPassword);
+            persistance.setPassword(encPassword);
+            persistance.setEmail(user.getEmail());
+        }
+
+
 
 
 

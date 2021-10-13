@@ -1,3 +1,4 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file ="../layout/header.jsp" %>
@@ -10,17 +11,30 @@
     <label for="username">Username</label>
     <input type="text" value="${principal.user.username}" class="form-control" placeholder="Enter username" id="username" readonly>
   </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" placeholder="Enter password" id="password">
-  </div>
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" id="email">
-  </div>
+  <c:choose>
+    <c:when test="${empty principal.user.oauth}">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" placeholder="Enter password" id="password">
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" id="email">
+      </div>
+      <button id="btn-update" class="btn btn-primary">회원수정완료</button>
 </form>
+    </c:when>
+  <C:otherwise>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" readonly>
+    </div>
+  </C:otherwise>
+  </c:choose>
 
-  <button id="btn-update" class="btn btn-primary">회원수정완료</button>
+
+
+
 
 </div>
 
