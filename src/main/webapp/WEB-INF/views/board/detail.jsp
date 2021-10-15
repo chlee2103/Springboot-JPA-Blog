@@ -12,8 +12,8 @@
     <br/>
     <br/>
     <div>
-        글번호 : <span id="id"><i>${board.id}</i></span>
-        작성자 : <span><i>${board.user.username}</i></span>
+        글번호 : <span id="id">${board.id}</span>
+        작성자 : <span>${board.user.username}</span>
     </div>
     <br/>
     <div>
@@ -24,6 +24,32 @@
         <div>${board.content}</div>
     </div>
     <hr/>
+
+    <div class="card">
+        <div class="card-body">
+            <textarea class="form-control" rows="1"></textarea>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" type="button">등록</button>
+        </div>
+    </div>
+    <br/>
+    <div class="card">
+        <div class="card-header">댓글 리스트</div>
+        <ul id="reply--box" class="list-group">
+            <c:forEach var="reply" items="${board.replys}">
+            <li id="reply--1" class="list-group-item d-flex justify-content-between" >
+                <div>${reply.content}</div>
+                <div class="d-flex">
+                    <div>작성자 : ${reply.user.username} &nbsp;</div>
+                    <button class="badge">삭제</button>
+                </div>
+            </li>
+            </c:forEach>
+        </ul>
+    </div>
+
+
 </div>
 
 <script src="/js/board.js"></script>

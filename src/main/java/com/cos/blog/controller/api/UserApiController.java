@@ -41,9 +41,11 @@ public class UserApiController {
 
         // 세션등록 (회원정보 수정 후 info내역도 변경해주기 위한 작업)
         // DB에 값이 변경된 후 다시 로그인 하는 것
+
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        System.out.println(user.toString());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

@@ -62,7 +62,7 @@ let index = {
             dataType:"json"
         }).done(function (resp){
             alert('글수정이 완료되었습니다.');
-            //console.log(resp);
+            console.log(resp);
             location.href="/";
         }).fail(function (error){
             alert(JSON.stringify(error));

@@ -49,6 +49,7 @@ let index = {
             contentType:"application/json; charset=utf-8",
             dataType:"json"
         }).done(function (resp){
+            console.log(resp);
             alert('회원수정이 완료되었습니다.');
 
             location.href="/";

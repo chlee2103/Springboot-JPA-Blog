@@ -1,5 +1,6 @@
 package com.cos.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,10 +36,12 @@ public class Board {
 	@JoinColumn(name="userId")
 	private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
 	
-	@OneToMany (mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다 ( 난 FK가 아니예요) DB에 컬럼을 만들지 마세요
+
 	// 1개의 게시글엔 여러개의 리플이 달릴 수 있다.
 	// select 하기 위한 코드
-	private List<Reply> reply;
+	@OneToMany (mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다 ( 난 FK가 아니예요) DB에 컬럼을 만들지 마세요
+	@JsonIgnoreProperties({"board"}) // board를 통해 reply를 뽑을땐 board데이터를 뽑지 않겠다.
+	private List<Reply> replys;
 	
 	@CreationTimestamp // 알아서 시간등록
 	private Timestamp createDate;
