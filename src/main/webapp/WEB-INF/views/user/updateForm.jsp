@@ -21,7 +21,7 @@
         <label for="email">Email address</label>
         <input type="email" value="${principal.user.email}" class="form-control" placeholder="Enter email" id="email">
       </div>
-      <button id="btn-update" class="btn btn-primary">회원수정완료</button>
+      <button type="button" id="btn-update" class="btn btn-primary">회원수정완료</button>
 </form>
     </c:when>
   <C:otherwise>

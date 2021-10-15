@@ -41,36 +41,21 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
 
-        <sec:authorize access="isAnonymous()">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="/auth/loginForm">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="/auth/joinForm">Join</a></li>
-            </ul>
-        </sec:authorize>
-        <sec:authorize access="isAuthenticated()">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="/board/savaForm">Write</a></li>
-                <li class="nav-item"><a class="nav-link" href="/user/updateForm">Info</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-            </ul>
-        </sec:authorize>
-        <%--    <c:choose>--%>
-        <%--      <c:when test="${empty sessionScope.login}">--%>
-        <%--        <ul class="navbar-nav">--%>
-        <%--          <li class="nav-item"><a class="nav-link" href="/auth/loginForm">Login</a></li>--%>
-        <%--          <li class="nav-item"><a class="nav-link" href="/auth/joinForm">Join</a></li>--%>
-        <%--        </ul>--%>
-        <%--      </c:when>--%>
-        <%--      <c:otherwise>--%>
-        <%--        <ul class="navbar-nav">--%>
-        <%--          <li class="nav-item"><a class="nav-link" href="/board/form">Write</a></li>--%>
-        <%--          <li class="nav-item"><a class="nav-link" href="/user/form">Info</a></li>--%>
-        <%--          <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>--%>
-        <%--        </ul>--%>
-        <%--      </c:otherwise>--%>
-        <%--    </c:choose>--%>
-
-
+        <c:choose>
+            <c:when test="${empty principal}">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/auth/loginForm">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/auth/joinForm">Join</a></li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/board/savaForm">Write</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user/updateForm">Info</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                </ul>
+            </c:otherwise>
+        </c:choose>
     </div>
 </nav>
 <br/>

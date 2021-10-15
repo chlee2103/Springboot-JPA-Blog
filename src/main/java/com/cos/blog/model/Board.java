@@ -39,8 +39,10 @@ public class Board {
 
 	// 1개의 게시글엔 여러개의 리플이 달릴 수 있다.
 	// select 하기 위한 코드
-	@OneToMany (mappedBy = "board", fetch = FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다 ( 난 FK가 아니예요) DB에 컬럼을 만들지 마세요
+	// cascade = CascadeType.REMOVE : borad 삭제시 댓글도 삭제됨.
+	@OneToMany (mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아니다 ( 난 FK가 아니예요) DB에 컬럼을 만들지 마세요
 	@JsonIgnoreProperties({"board"}) // board를 통해 reply를 뽑을땐 board데이터를 뽑지 않겠다.
+	@OrderBy("id desc")
 	private List<Reply> replys;
 	
 	@CreationTimestamp // 알아서 시간등록

@@ -12,9 +12,9 @@ public class GlobalExceptionHandler {
 
     // Exception으로 걸어두면 모든 Exception이 이 메소드로 들어온다.
     // IllegalArgumentException 발생했을 때 실행함
-    @ExceptionHandler(value = IllegalArgumentException.class)
-   public ResponseDto<String> handleArgumentException(IllegalArgumentException e){
-        return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
+    @ExceptionHandler(value = Exception.class)
+   public ResponseDto<String> handleArgumentException(Exception e){
+        return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()); // 500
     }
 
 }
